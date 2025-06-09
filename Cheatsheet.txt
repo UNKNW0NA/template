@@ -18,3 +18,7 @@ ORDER BY g.name
 
 MATCH (u:User {name: "USERNAME@DOMAIN.LOCAL"})-[:MemberOf]->(g:Group)
 RETURN g.name AS GroupName
+
+MATCH (u:User)
+WHERE toLower(u.name) CONTAINS "user1"
+RETURN u.name
