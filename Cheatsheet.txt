@@ -12,6 +12,8 @@ done
 
 IF (SELECT is_srvrolemember('sysadmin')) IS NOT NULL waitfor delay '0:0:10'--
 
+for f in *; do while read line; do echo "$line"; done < "$f"; done
+
 
 MATCH p = shortestPath(
   (g:Group {name:"DOMAIN\\GroupName"})-[:MemberOf|AdminTo*1..]->(u:User)
