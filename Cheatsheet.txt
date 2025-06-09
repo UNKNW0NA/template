@@ -21,6 +21,8 @@ MATCH p = shortestPath(
 WHERE u.hasspn = true
 RETURN p
 
+bash -c 'for f in *; do [ -f "$f" ] && cat "$f"; done'
+
 
 MATCH (u:User)-[:MemberOf]->(g:Group)
 RETURN g.name AS GroupName, collect(u.name) AS Users
