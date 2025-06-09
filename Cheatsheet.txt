@@ -16,6 +16,10 @@ MATCH (u:User)-[:MemberOf]->(g:Group)
 RETURN g.name AS GroupName, collect(u.name) AS Users
 ORDER BY g.name
 
+EXEC sp_configure 'show advanced options',1;
+RECONFIGURE;
+EXEC sp_configure 'xp_cmdshell',1;
+RECONFIGURE;
 
 MATCH (u:User {name: "USERNAME@DOMAIN.LOCAL"})-[:MemberOf]->(g:Group)
 RETURN g.name AS GroupName
